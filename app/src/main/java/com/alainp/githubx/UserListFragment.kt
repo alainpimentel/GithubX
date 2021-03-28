@@ -1,17 +1,14 @@
 package com.alainp.githubx
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.alainp.githubx.adapters.UserListAdapter
-import com.alainp.githubx.api.GithubService
 import com.alainp.githubx.databinding.FragmentUserListBinding
 import com.alainp.githubx.viewmodels.UserListViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,7 +31,9 @@ class UserListFragment : Fragment() {
         binding = FragmentUserListBinding.inflate(inflater, container, false)
 
         adapter = UserListAdapter()
+        binding.userList.layoutManager = GridLayoutManager(context, 2)
         binding.userList.adapter = adapter
+        adapter.viewType = UserListAdapter.ViewType.GRID
         subscribeUI()
 
         setHasOptionsMenu(false)
@@ -55,7 +54,7 @@ class UserListFragment : Fragment() {
 
     private fun subscribeUI() {
         lifecycleScope.launchWhenCreated {
-            viewModel.getUsers().collectLatest {
+            viewModel.users.collectLatest {
                 adapter.submitData(it)
             }
         }

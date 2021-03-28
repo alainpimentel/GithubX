@@ -13,7 +13,7 @@ class GithubRepository @Inject constructor(
     private val service: GithubService
 ) {
     @OptIn(ExperimentalPagingApi::class)
-    fun getUsers(pageSize: Int) = Pager(
+    fun getUsers(pageSize: Int = 50) = Pager(
         config = PagingConfig(pageSize),
         remoteMediator = PagedKeyRemoteMediator(db, service)
     ) {
