@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alainp.githubx.adapters.UserListAdapter
 import com.alainp.githubx.databinding.FragmentUserListBinding
 import com.alainp.githubx.viewmodels.UserListViewModel
@@ -31,26 +32,38 @@ class UserListFragment : Fragment() {
         binding = FragmentUserListBinding.inflate(inflater, container, false)
 
         adapter = UserListAdapter()
-        binding.userList.layoutManager = GridLayoutManager(context, 2)
+        setRecyclerViewLayoutManager()
         binding.userList.adapter = adapter
-        adapter.viewType = UserListAdapter.ViewType.GRID
         subscribeUI()
 
         setHasOptionsMenu(false)
 
-//        val service = GithubService.create()
-//        lifecycleScope.launchWhenCreated {
-//            val users = service.getUsers(1)
-//            Log.d("messi", "$users")
-//        }
+        binding.fab.setOnClickListener {
+            viewModel.toggleViewType()
+            setRecyclerViewLayoutManager()
+        }
 
         return binding.root
     }
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//    }
+
+    private fun setRecyclerViewLayoutManager() {
+        var scrollPosition = 0
+
+        if (binding.userList.layoutManager != null) {
+            scrollPosition = (binding.userList.layoutManager as LinearLayoutManager)
+                .findFirstCompletelyVisibleItemPosition()
+        }
+         if (viewModel.viewType == UserListViewModel.ViewType.LIST) {
+            binding.userList.layoutManager = LinearLayoutManager(context)
+            UserListViewModel.ViewType.LIST
+        } else {
+            binding.userList.layoutManager = GridLayoutManager(context, 2)
+            UserListViewModel.ViewType.GRID
+        }
+
+        binding.userList.scrollToPosition(scrollPosition)
+    }
 
     private fun subscribeUI() {
         lifecycleScope.launchWhenCreated {
@@ -59,4 +72,5 @@ class UserListFragment : Fragment() {
             }
         }
     }
+
 }

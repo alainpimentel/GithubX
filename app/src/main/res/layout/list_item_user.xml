@@ -16,61 +16,68 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
-        android:onClick="@{clickListener}">
+        android:layout_margin="@dimen/margin_small">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/top_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="@dimen/user_item_padding" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:onClick="@{clickListener}">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/bottom_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_end="@dimen/user_item_padding" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/top_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="@dimen/user_item_padding" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/end_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="@dimen/user_item_padding" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/bottom_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="@dimen/user_item_padding" />
 
-        <ImageView
-            android:id="@+id/user_item_image"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/user_item_image_height"
-            android:layout_marginStart="@dimen/user_item_padding"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_launcher_background"
-            app:imageUrl="@{viewmodel.avatarUrl}"
-            app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
-            app:layout_constraintEnd_toStartOf="@id/user_name_text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/top_guideline"
-            app:layout_constraintWidth_percent="0.35" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/user_item_padding" />
 
-        <TextView
-            android:id="@+id/user_name_text"
-            style="@style/TextAppearance.MaterialComponents.Subtitle2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/user_item_padding"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/user_item_image"
-            app:layout_constraintEnd_toEndOf="@id/end_guideline"
-            app:layout_constraintStart_toEndOf="@id/user_item_image"
-            app:layout_constraintTop_toTopOf="@id/user_item_image"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:text="xorline" />
+            <ImageView
+                android:id="@+id/user_item_image"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/user_item_image_height"
+                android:layout_marginStart="@dimen/user_item_padding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_launcher_background"
+                app:imageUrl="@{viewmodel.avatarUrl}"
+                app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
+                app:layout_constraintEnd_toStartOf="@id/user_name_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/top_guideline"
+                app:layout_constraintWidth_percent="0.35" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/user_name_text"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/user_item_padding"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/user_item_image"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toEndOf="@id/user_item_image"
+                app:layout_constraintTop_toTopOf="@id/user_item_image"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="xorline" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </layout>

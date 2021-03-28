@@ -21,11 +21,14 @@ class UserListViewModel @Inject internal constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    init {
-        if (!savedStateHandle.contains(KEY_SAVED_STATE)) {
-            savedStateHandle.set(KEY_SAVED_STATE, DEFAULT_USERS)
+    private var _viewType = ViewType.LIST
+        set(value) {
+            field = value
+            savedStateHandle.set(KEY_SAVED_VIEW_TYPE, viewType.type)
         }
-    }
+
+    val viewType
+        get() = _viewType
 
     private val clearListCh = Channel<Unit>(Channel.CONFLATED)
 
@@ -40,13 +43,40 @@ class UserListViewModel @Inject internal constructor(
             .cachedIn(viewModelScope)
     ).flattenMerge(2)
 
+    init {
+        if (!savedStateHandle.contains(KEY_SAVED_STATE)) {
+            savedStateHandle.set(KEY_SAVED_STATE, DEFAULT_USERS)
+        }
+        if (!savedStateHandle.contains(KEY_SAVED_VIEW_TYPE)) {
+            savedStateHandle.set(KEY_SAVED_VIEW_TYPE, viewType.type)
+        }
+    }
 
-//    fun getUsers(): Flow<PagingData<User>> {
-//        return githubRepository.getUsers(20).cachedIn(viewModelScope)
-//    }
+    fun toggleViewType() {
+        _viewType =
+            if (_viewType == ViewType.LIST) ViewType.GRID
+            else ViewType.LIST
+
+    }
+
+    enum class ViewType(val type: Int) {
+        LIST(ITEM_VIEW_TYPE_GRID),
+        GRID(ITEM_VIEW_TYPE_LIST);
+
+        companion object {
+            fun from(type: Int): ViewType {
+                return if (type == ITEM_VIEW_TYPE_GRID) GRID
+                else LIST
+            }
+        }
+    }
 
     companion object {
-        const val KEY_SAVED_STATE = "users"
-        const val DEFAULT_USERS = "users"
+        private const val KEY_SAVED_STATE = "users"
+        private const val DEFAULT_USERS = "users"
+        private const val KEY_SAVED_VIEW_TYPE = "viewtype"
+        private const val ITEM_VIEW_TYPE_LIST = 0
+        private const val ITEM_VIEW_TYPE_GRID = 1
+
     }
 }
