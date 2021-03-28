@@ -2,8 +2,8 @@
     <string name="app_name">GithubX</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="user_list_fragment_label">User List Fragment</string>
-    <string name="user_detail_fragment_label">User Detail Fragment</string>
+    <string name="user_list_fragment_label">GithubX</string>
+    <string name="user_detail_fragment_label">GithubX</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
@@ -14,4 +14,5 @@
     <string name="followers">%,d followers</string>
     <string name="following"> -  %,d following</string>
     <string name="retry">Retry</string>
+    <string name="error_getting_user_details">Error getting user details.</string>
 </resources>

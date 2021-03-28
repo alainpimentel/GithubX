@@ -1,7 +1,6 @@
 package com.alainp.githubx
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,13 +15,11 @@ import com.alainp.githubx.viewmodels.UserDetailViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 @AndroidEntryPoint
 class UserDetailFragment : Fragment() {
 
     private val args: UserDetailFragmentArgs by navArgs()
+
     @Inject
     lateinit var userDetailViewModelViewModelFactory: UserDetailViewModelFactory
     private val viewModel: UserDetailViewModel by viewModels() {
@@ -35,8 +32,8 @@ class UserDetailFragment : Fragment() {
 
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(
             inflater,
@@ -51,30 +48,36 @@ class UserDetailFragment : Fragment() {
     private fun subscribeUI() {
         viewModel.userDetail.observe(viewLifecycleOwner) { userDetail ->
             binding.progressBar.isGone = true
-            binding.codeInfoCardView.isGone = false
-            binding.userInfoCardView.isGone = false
-
-            binding.viewModel = viewModel
-            //binding.userDetailLogin.text = userDetail.login
-            if (userDetail.company == null) {
-                binding.companyText.isGone = true
-            } else {
-                binding.companyText.isGone = false
-                binding.companyText.text = userDetail.company
+            if (userDetail == null) {
+                binding.errorText.isGone = false
             }
+            userDetail?.let { userDets ->
+                binding.codeInfoCardView.isGone = false
+                binding.userInfoCardView.isGone = false
 
-            if (userDetail.location == null) {
-                binding.locationText.isGone = true
-            } else {
-                binding.locationText.isGone = false
-                binding.locationText.text = userDetail.location
+                binding.viewModel = viewModel
+                if (userDets.company == null) {
+                    binding.companyText.isGone = true
+                } else {
+                    binding.companyText.isGone = false
+                    binding.companyText.text = userDets.company
+                }
+
+                if (userDets.location == null) {
+                    binding.locationText.isGone = true
+                } else {
+                    binding.locationText.isGone = false
+                    binding.locationText.text = userDets.location
+                }
+
+                binding.followersText.text =
+                    String.format(getString(R.string.followers), userDets.followers)
+                binding.followingText.text =
+                    String.format(getString(R.string.following), userDets.publicGists)
+
+                binding.publicReposValue.text = String.format("%,d", userDets.publicRepos)
+                binding.publicGistValue.text = String.format("%,d", userDets.publicGists)
             }
-
-            binding.followersText.text = String.format(getString(R.string.followers), userDetail.followers)
-            binding.followingText.text = String.format(getString(R.string.following), userDetail.publicGists)
-
-            binding.publicReposValue.text = String.format("%,d", userDetail.publicRepos)
-            binding.publicGistValue.text = String.format("%,d", userDetail.publicGists)
         }
     }
 }
