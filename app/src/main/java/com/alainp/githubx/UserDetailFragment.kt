@@ -1,31 +1,60 @@
 package com.alainp.githubx
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.fragment.findNavController
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
+import com.alainp.githubx.databinding.FragmentUserDetailBinding
+import com.alainp.githubx.viewmodels.UserDetailViewModel
+import com.alainp.githubx.viewmodels.UserDetailViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
+@AndroidEntryPoint
 class UserDetailFragment : Fragment() {
+
+    private val args: UserDetailFragmentArgs by navArgs()
+    @Inject
+    lateinit var userDetailViewModelViewModelFactory: UserDetailViewModelFactory
+    private val viewModel: UserDetailViewModel by viewModels() {
+        UserDetailViewModel.provideFactory(
+            userDetailViewModelViewModelFactory,
+            args.username
+        )
+    }
+    private lateinit var binding: FragmentUserDetailBinding
+
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_detail, container, false)
+    ): View {
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_user_detail,
+            container,
+            false
+        )
+        subscribeUI()
+        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun subscribeUI() {
+//        binding.viewModel = viewModel
+//        binding.executePendingBindings()
 
-        view.findViewById<Button>(R.id.button_second).setOnClickListener {
-            findNavController().navigate(R.id.action_UserDetailFragment_to_UserListFragment)
+        viewModel.userDetail.observe(viewLifecycleOwner) { userDetail ->
+            Log.d("messi", "The user is here $userDetail")
+            binding.viewModel = viewModel
+            //binding.userDetailLogin.text = userDetail.login
         }
     }
 }

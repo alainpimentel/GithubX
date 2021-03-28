@@ -36,14 +36,23 @@ class UserListAdapter :
         private val binding: ListItemUserBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        private var user: User? = null
+
         init {
             binding.setClickListener { view ->
-                view.findNavController()
-                    .navigate(UserListFragmentDirections.actionUserListFragmentToUserDetailFragment())
+                user?.let {
+                    view.findNavController()
+                        .navigate(
+                            UserListFragmentDirections.actionUserListFragmentToUserDetailFragment(
+                                it.login
+                            )
+                        )
+                }
             }
         }
 
         fun bind(item: User, position: Int) {
+            user = item
             binding.apply {
                 viewmodel = ListItemUserViewModel(item)
                 executePendingBindings()

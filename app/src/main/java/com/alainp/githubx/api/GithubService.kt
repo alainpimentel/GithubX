@@ -10,6 +10,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 
@@ -21,8 +22,8 @@ interface GithubService {
         @Query("perpage") perpage: Int = DEFAULT_LIMIT
     ): List<User>
 
-    @GET("user")
-    suspend fun getUserDetail(@Query("login") login: String): UserDetail
+    @GET("/users/{username}")
+    suspend fun getUserDetail(@Path("username") username: String): UserDetail
 
     companion object {
         private const val BASE_URL = "https://api.github.com/"

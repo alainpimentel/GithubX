@@ -7,10 +7,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.alainp.githubx.utilities.DATABASE_NAME
 
-@Database(entities = [User::class, UserRemoteKey::class], version = 1, exportSchema = false)
+@Database(entities = [User::class, UserRemoteKey::class, UserDetail::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun userRemoteKeyDao(): UserRemoteKeyDao
+    abstract fun userDetailDao(): UserDetailDao
 
     companion object {
 

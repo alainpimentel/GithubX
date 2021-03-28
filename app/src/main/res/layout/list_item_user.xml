@@ -69,12 +69,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/user_item_padding"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/user_item_image"
+                android:ellipsize="end"
+                android:maxLines="2"
+                app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
                 app:layout_constraintEnd_toEndOf="@id/end_guideline"
                 app:layout_constraintStart_toEndOf="@id/user_item_image"
-                app:layout_constraintTop_toTopOf="@id/user_item_image"
+                app:layout_constraintTop_toTopOf="@id/top_guideline"
                 app:layout_constraintVertical_chainStyle="packed"
-                tools:text="xorline" />
+                tools:text="xorlineisalong user name and what if it does not fit aasda asd sad asdsada " />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

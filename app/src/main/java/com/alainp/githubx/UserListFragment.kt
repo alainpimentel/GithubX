@@ -58,6 +58,7 @@ class UserListFragment : Fragment() {
             binding.userList.layoutManager = LinearLayoutManager(context)
             UserListViewModel.ViewType.LIST
         } else {
+            // TODO change span count based on device
             binding.userList.layoutManager = GridLayoutManager(context, 2)
             UserListViewModel.ViewType.GRID
         }
