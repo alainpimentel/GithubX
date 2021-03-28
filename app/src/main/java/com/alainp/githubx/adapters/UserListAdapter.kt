@@ -2,9 +2,11 @@ package com.alainp.githubx.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.alainp.githubx.UserListFragmentDirections
 import com.alainp.githubx.data.User
 import com.alainp.githubx.databinding.ListItemUserBinding
 
@@ -31,6 +33,13 @@ class UserListAdapter :
     class UserViewHolder(
         private val binding: ListItemUserBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.setClickListener { view ->
+                view.findNavController()
+                    .navigate(UserListFragmentDirections.actionUserListFragmentToUserDetailFragment())
+            }
+        }
 
         fun bind(item: User, position: Int) {
             //todo remove position
