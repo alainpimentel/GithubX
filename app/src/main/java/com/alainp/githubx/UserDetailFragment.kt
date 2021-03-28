@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -55,6 +56,25 @@ class UserDetailFragment : Fragment() {
             Log.d("messi", "The user is here $userDetail")
             binding.viewModel = viewModel
             //binding.userDetailLogin.text = userDetail.login
+            if (userDetail.company == null) {
+                binding.companyText.isGone = true
+            } else {
+                binding.companyText.isGone = false
+                binding.companyText.text = userDetail.company
+            }
+
+            if (userDetail.location == null) {
+                binding.locationText.isGone = true
+            } else {
+                binding.locationText.isGone = false
+                binding.locationText.text = userDetail.location
+            }
+
+            binding.followersText.text = String.format(getString(R.string.followers), userDetail.followers)
+            binding.followingText.text = String.format(getString(R.string.following), userDetail.publicGists)
+
+            binding.publicReposValue.text = String.format("%,d", userDetail.publicRepos)
+            binding.publicGistValue.text = String.format("%,d", userDetail.publicGists)
         }
     }
 }

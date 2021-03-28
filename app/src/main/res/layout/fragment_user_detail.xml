@@ -15,89 +15,310 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        tools:context=".MainActivity"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".MainActivity">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/margin_normal">
+            android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/start_guideline"
-                android:layout_width="wrap_content"
+            <!--            <androidx.constraintlayout.widget.Guideline-->
+            <!--                android:id="@+id/start_guideline"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:orientation="vertical"-->
+            <!--                app:layout_constraintGuide_begin="@dimen/user_item_padding" />-->
+
+            <!--            <androidx.constraintlayout.widget.Guideline-->
+            <!--                android:id="@+id/end_guideline"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:orientation="vertical"-->
+            <!--                app:layout_constraintGuide_end="@dimen/user_item_padding" />-->
+
+            <!--            <androidx.constraintlayout.widget.Guideline-->
+            <!--                android:id="@+id/top_guideline"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                app:layout_constraintGuide_begin="@dimen/user_item_padding" />-->
+
+            <!--            <androidx.constraintlayout.widget.Guideline-->
+            <!--                android:id="@+id/bottom_guideline"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                app:layout_constraintGuide_end="@dimen/user_item_padding" />-->
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/user_info_card_view"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="@dimen/user_item_padding" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/end_guideline"
-                android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/start_guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="@dimen/user_item_padding" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/end_guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="@dimen/user_item_padding" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/top_guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_begin="@dimen/user_item_padding" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/bottom_guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_end="@dimen/user_item_padding" />
+
+
+                    <ImageView
+                        android:id="@+id/user_image"
+                        android:layout_width="@dimen/user_item_image_height"
+                        android:layout_height="@dimen/user_item_image_height"
+                        android:fitsSystemWindows="true"
+                        android:scaleType="fitCenter"
+                        app:imageUrl="@{viewModel.userDetail.avatarUrl}"
+                        app:layout_collapseMode="parallax"
+                        app:layout_constraintStart_toStartOf="@id/start_guideline"
+                        app:layout_constraintTop_toTopOf="@id/top_guideline"
+                        tools:src="@drawable/ic_baseline_person_24" />
+
+                    <TextView
+                        android:id="@+id/user_detail_name"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:layout_marginEnd="@dimen/margin_small"
+                        android:gravity="center_horizontal|start"
+                        android:text="@{viewModel.userDetail.name}"
+                        android:textAppearance="?attr/textAppearanceHeadline5"
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/user_image"
+                        app:layout_constraintTop_toTopOf="@id/top_guideline"
+                        app:layout_goneMarginStart="@dimen/margin_small"
+                        tools:text="Apple" />
+
+
+                    <!--            <androidx.constraintlayout.widget.Barrier-->
+                    <!--                android:id="@+id/barrier7"-->
+                    <!--                android:layout_width="wrap_content"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                app:barrierDirection="bottom"-->
+                    <!--                app:constraint_referenced_ids="user_detail_name,user_image" />-->
+
+                    <TextView
+                        android:id="@+id/user_detail_login"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:layout_marginEnd="@dimen/margin_small"
+                        android:gravity="center_horizontal|start"
+                        android:maxLines="1"
+                        android:text="@{viewModel.userDetail.login}"
+                        android:textAppearance="?attr/textAppearanceHeadline5"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/user_image"
+                        app:layout_constraintTop_toBottomOf="@+id/user_detail_name"
+                        app:layout_goneMarginStart="@dimen/margin_small"
+                        tools:text="Apple" />
+
+
+                    <TextView
+                        android:id="@+id/company_text"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:drawableStart="@drawable/ic_baseline_business_24"
+                        android:text="@{viewModel.userDetail.company}"
+                        android:drawablePadding="@dimen/margin_small"
+                        app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                        app:layout_constraintStart_toStartOf="@id/start_guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/user_image"
+                        tools:text="Apple" />
+
+                    <TextView
+                        android:id="@+id/location_text"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:drawableStart="@drawable/ic_baseline_location_on_24"
+                        android:text="@{viewModel.userDetail.location}"
+                        android:drawablePadding="@dimen/margin_small"
+                        app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                        app:layout_constraintStart_toStartOf="@id/start_guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/company_text"
+                        app:layout_goneMarginStart="@dimen/margin_small"
+                        tools:text="Palo Alto, CA" />
+
+                    <TextView
+                        android:id="@+id/followers_text"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:drawableStart="@drawable/ic_baseline_person_pin_24"
+                        android:gravity="center_horizontal|start"
+                        android:paddingBottom="@dimen/margin_normal"
+                        android:drawablePadding="@dimen/margin_small"
+                        app:layout_constraintStart_toStartOf="@id/start_guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/location_text"
+                        tools:text="8 followers" />
+
+                    <TextView
+                        android:id="@+id/following_text"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:gravity="center_horizontal|start"
+                        android:paddingBottom="@dimen/margin_normal"
+                        app:layout_constraintStart_toEndOf="@id/followers_text"
+                        app:layout_constraintTop_toBottomOf="@+id/location_text"
+                        tools:text="3 following" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/code_info_card_view"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="@dimen/user_item_padding" />
+                android:layout_marginTop="@dimen/margin_normal"
+                app:layout_constraintTop_toBottomOf="@id/user_info_card_view">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/top_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="@dimen/user_item_padding" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/bottom_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_end="@dimen/user_item_padding" />
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/start_guideline2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="@dimen/user_item_padding" />
 
-            <ImageView
-                android:id="@+id/user_image"
-                android:layout_width="@dimen/user_item_image_height"
-                android:layout_height="@dimen/user_item_image_height"
-                android:fitsSystemWindows="true"
-                android:scaleType="fitCenter"
-                app:imageUrl="@{viewModel.userDetail.avatarUrl}"
-                app:layout_constraintTop_toTopOf="@id/top_guideline"
-                app:layout_constraintStart_toStartOf="@id/start_guideline"
-                app:layout_collapseMode="parallax"
-                tools:src="@drawable/ic_baseline_person_24" />
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/end_guideline2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="@dimen/user_item_padding" />
 
-            <TextView
-                style="@style/TextAppearance.MaterialComponents.Headline4"
-                android:id="@+id/user_detail_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginEnd="@dimen/margin_small"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center_horizontal|start"
-                android:textAppearance="?attr/textAppearanceHeadline5"
-                android:text="@{viewModel.userDetail.name}"
-                app:layout_goneMarginStart="@dimen/margin_small"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/user_image"
-                app:layout_constraintTop_toTopOf="@id/top_guideline"
-                tools:text="Apple" />
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/top_guideline2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_begin="@dimen/user_item_padding" />
 
-            <TextView
-                style="@style/TextAppearance.MaterialComponents.Headline5"
-                android:id="@+id/user_detail_login"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginEnd="@dimen/margin_small"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center_horizontal|start"
-                android:text="@{viewModel.userDetail.login}"
-                android:textAppearance="?attr/textAppearanceHeadline5"
-                app:layout_goneMarginStart="@dimen/margin_small"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/user_image"
-                app:layout_constraintTop_toBottomOf="@+id/user_detail_name"
-                tools:text="Apple" />
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/bottom_guideline2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_end="@dimen/user_item_padding" />
+
+                    <TextView
+                        android:id="@+id/user_bio_text"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:layout_marginEnd="@dimen/margin_small"
+                        android:gravity="center_horizontal|start"
+                        android:text="@{viewModel.userDetail.bio}"
+                        app:layout_constraintEnd_toEndOf="@id/end_guideline2"
+                        app:layout_constraintStart_toStartOf="@id/start_guideline2"
+                        app:layout_constraintTop_toTopOf="@id/top_guideline2"
+                        tools:text="This is a placeholder for a sort of longer sentence s that can go over two lines." />
+
+                    <TextView
+                        android:id="@+id/public_repos_text"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:layout_marginEnd="@dimen/margin_small"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:gravity="center_horizontal|start"
+                        android:text="@string/repositories"
+                        app:layout_constraintEnd_toEndOf="@id/end_guideline2"
+                        app:layout_constraintStart_toStartOf="@id/start_guideline2"
+                        app:layout_constraintTop_toBottomOf="@id/user_bio_text"/>
+
+                    <TextView
+                        android:id="@+id/public_repos_value"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:layout_marginEnd="@dimen/margin_small"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:gravity="center_horizontal|start"
+                        app:layout_constraintEnd_toEndOf="@id/end_guideline2"
+                        app:layout_constraintTop_toBottomOf="@id/user_bio_text"
+                        tools:text="1"/>
+
+                    <TextView
+                        android:id="@+id/public_gist_text"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:layout_marginEnd="@dimen/margin_small"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:gravity="center_horizontal|start"
+                        android:text="@string/gists"
+                        android:paddingBottom="@dimen/margin_normal"
+                        app:layout_constraintEnd_toEndOf="@id/end_guideline2"
+                        app:layout_constraintStart_toStartOf="@id/start_guideline2"
+                        app:layout_constraintTop_toBottomOf="@id/public_repos_text"/>
+
+                    <TextView
+                        android:id="@+id/public_gist_value"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:layout_marginEnd="@dimen/margin_small"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:gravity="center_horizontal|start"
+                        app:layout_constraintEnd_toEndOf="@id/end_guideline2"
+                        app:layout_constraintTop_toBottomOf="@id/public_repos_text"
+                        tools:text="1"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

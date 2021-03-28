@@ -34,7 +34,7 @@ class GithubRepository @Inject constructor(
 
             val currentTimeMillis = System.currentTimeMillis()
             val exists =
-                db.userDetailDao().hasUserDetail(username, currentTimeMillis - 1 * 60 * 1000)
+                db.userDetailDao().hasUserDetail(username, currentTimeMillis - TIMEOUT_DATA_MS)
             if (!exists) {
                 Log.d(TAG, "User $username does not exist, fetching...")
                 val response = service.getUserDetail(username)
@@ -55,5 +55,6 @@ class GithubRepository @Inject constructor(
 
     companion object {
         private const val TAG = "GithubRepoMessi"
+        private const val TIMEOUT_DATA_MS = 5 * 60 * 1000
     }
 }
