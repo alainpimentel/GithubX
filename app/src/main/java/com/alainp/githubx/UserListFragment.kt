@@ -16,9 +16,6 @@ import com.alainp.githubx.viewmodels.UserListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 @AndroidEntryPoint
 class UserListFragment : Fragment() {
 
@@ -62,7 +59,6 @@ class UserListFragment : Fragment() {
                 binding.userList.layoutManager = LinearLayoutManager(context)
                 UserListViewModel.ViewType.LIST
             } else {
-                // TODO change span count based on device
                 val colWidth =
                     it.resources.getDimension(R.dimen.grid_column_width).toInt()
                 binding.userList.layoutManager = GridAutofitLayoutManager(it, colWidth)

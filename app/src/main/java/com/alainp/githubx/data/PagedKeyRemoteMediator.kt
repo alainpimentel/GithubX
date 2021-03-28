@@ -18,14 +18,12 @@ class PagedKeyRemoteMediator(
 ) : RemoteMediator<Int, User>() {
 
     override suspend fun initialize(): InitializeAction {
-        // Require that remote REFRESH is launched on initial load and succeeds before launching
-        // remote PREPEND / APPEND.
         return InitializeAction.LAUNCH_INITIAL_REFRESH
     }
 
     override suspend fun load(loadType: LoadType, state: PagingState<Int, User>): MediatorResult {
         try {
-            Log.d("messi", "load $loadType")
+            Log.d(TAG, "load $loadType")
             val loadKey: Long? = when (loadType) {
                 LoadType.REFRESH -> null
                 LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
@@ -34,7 +32,7 @@ class PagedKeyRemoteMediator(
                         db.userRemoteKeyDao().remoteKey()
                     }
 
-                    Log.d("messi", "load APPEND $remoteKey")
+                    Log.d(TAG, "load APPEND $remoteKey")
 
                     remoteKey?.since
                 }
@@ -42,7 +40,7 @@ class PagedKeyRemoteMediator(
             val data: List<User> = service.getUsers(since = loadKey ?: 0, perpage = pageSize)
             val lastItem = data.lastOrNull()
 
-            Log.d("messi", "load got users $data")
+            Log.d(TAG, "load got users $data")
 
             db.withTransaction {
                 if (loadType == LoadType.REFRESH) {
@@ -60,5 +58,9 @@ class PagedKeyRemoteMediator(
         } catch (e: HttpException) {
             return MediatorResult.Error(e)
         }
+    }
+
+    companion object {
+        private const val TAG = "MediatorMessi"
     }
 }

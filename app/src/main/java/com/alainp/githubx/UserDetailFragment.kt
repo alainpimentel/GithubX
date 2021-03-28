@@ -54,7 +54,6 @@ class UserDetailFragment : Fragment() {
             binding.codeInfoCardView.isGone = false
             binding.userInfoCardView.isGone = false
 
-            Log.d("messi", "The user is here $userDetail")
             binding.viewModel = viewModel
             //binding.userDetailLogin.text = userDetail.login
             if (userDetail.company == null) {

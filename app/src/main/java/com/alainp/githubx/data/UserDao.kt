@@ -12,7 +12,6 @@ interface UserDao {
     suspend fun insertAll(posts: List<User>)
 
     @Query("SELECT * FROM user ORDER BY id ASC")
-//    @Query("SELECT * FROM user WHERE id > :since ORDER BY id ASC")
     fun getUsers(): PagingSource<Int, User>
 
     @Query("DELETE FROM user")

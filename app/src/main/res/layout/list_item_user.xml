@@ -71,6 +71,7 @@
                 android:textSize="16sp"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:text="@{viewmodel.login}"
                 app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
                 app:layout_constraintEnd_toEndOf="@id/end_guideline"
                 app:layout_constraintStart_toEndOf="@id/user_item_image"

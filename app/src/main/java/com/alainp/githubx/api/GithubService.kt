@@ -2,10 +2,8 @@ package com.alainp.githubx.api
 
 import com.alainp.githubx.data.User
 import com.alainp.githubx.data.UserDetail
-import com.google.common.util.concurrent.RateLimiter
-import okhttp3.Interceptor
+import com.alainp.githubx.utilities.RateLimitInterceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -48,13 +46,3 @@ interface GithubService {
     }
 }
 
-// TODO remove this and guave dependency
-class RateLimitInterceptor : Interceptor {
-    private val limiter: RateLimiter = RateLimiter.create(0.133)
-
-
-    override fun intercept(chain: Interceptor.Chain): Response {
-        limiter.acquire(1)
-        return chain.proceed(chain.request())
-    }
-}

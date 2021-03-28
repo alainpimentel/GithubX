@@ -20,7 +20,6 @@ class GithubRepository @Inject constructor(
         config = PagingConfig(pageSize),
         remoteMediator = PagedKeyRemoteMediator(db, service, pageSize)
     ) {
-        //todo get since
         db.userDao().getUsers()
     }.flow
 

@@ -57,7 +57,6 @@ class UserListAdapter :
                 viewmodel = ListItemUserViewModel(item)
                 executePendingBindings()
             }
-            binding.userNameText.text = "$position - ${item.login}"
         }
 
     }
