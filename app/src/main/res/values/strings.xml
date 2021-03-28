@@ -15,4 +15,5 @@
     <string name="following"> -  %,d following</string>
     <string name="retry">Retry</string>
     <string name="error_getting_user_details">Error getting user details.</string>
+    <string name="users_error">Error getting users from Github.</string>
 </resources>
