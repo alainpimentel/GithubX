@@ -49,10 +49,11 @@ class UserDetailFragment : Fragment() {
     }
 
     private fun subscribeUI() {
-//        binding.viewModel = viewModel
-//        binding.executePendingBindings()
-
         viewModel.userDetail.observe(viewLifecycleOwner) { userDetail ->
+            binding.progressBar.isGone = true
+            binding.codeInfoCardView.isGone = false
+            binding.userInfoCardView.isGone = false
+
             Log.d("messi", "The user is here $userDetail")
             binding.viewModel = viewModel
             //binding.userDetailLogin.text = userDetail.login

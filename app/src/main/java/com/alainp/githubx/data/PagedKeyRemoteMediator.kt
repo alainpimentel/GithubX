@@ -13,7 +13,8 @@ import java.io.IOException
 @OptIn(ExperimentalPagingApi::class)
 class PagedKeyRemoteMediator(
     private val db: AppDatabase,
-    private val service: GithubService
+    private val service: GithubService,
+    private val pageSize: Int
 ) : RemoteMediator<Int, User>() {
 
     override suspend fun initialize(): InitializeAction {
@@ -38,7 +39,7 @@ class PagedKeyRemoteMediator(
                     remoteKey?.since
                 }
             }
-            val data: List<User> = service.getUsers(loadKey ?: 0)
+            val data: List<User> = service.getUsers(since = loadKey ?: 0, perpage = pageSize)
             val lastItem = data.lastOrNull()
 
             Log.d("messi", "load got users $data")

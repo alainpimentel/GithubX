@@ -23,39 +23,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!--            <androidx.constraintlayout.widget.Guideline-->
-            <!--                android:id="@+id/start_guideline"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:orientation="vertical"-->
-            <!--                app:layout_constraintGuide_begin="@dimen/user_item_padding" />-->
-
-            <!--            <androidx.constraintlayout.widget.Guideline-->
-            <!--                android:id="@+id/end_guideline"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:orientation="vertical"-->
-            <!--                app:layout_constraintGuide_end="@dimen/user_item_padding" />-->
-
-            <!--            <androidx.constraintlayout.widget.Guideline-->
-            <!--                android:id="@+id/top_guideline"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:orientation="horizontal"-->
-            <!--                app:layout_constraintGuide_begin="@dimen/user_item_padding" />-->
-
-            <!--            <androidx.constraintlayout.widget.Guideline-->
-            <!--                android:id="@+id/bottom_guideline"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:orientation="horizontal"-->
-            <!--                app:layout_constraintGuide_end="@dimen/user_item_padding" />-->
-
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/user_info_card_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent">
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -119,14 +93,6 @@
                         app:layout_goneMarginStart="@dimen/margin_small"
                         tools:text="Apple" />
 
-
-                    <!--            <androidx.constraintlayout.widget.Barrier-->
-                    <!--                android:id="@+id/barrier7"-->
-                    <!--                android:layout_width="wrap_content"-->
-                    <!--                android:layout_height="wrap_content"-->
-                    <!--                app:barrierDirection="bottom"-->
-                    <!--                app:constraint_referenced_ids="user_detail_name,user_image" />-->
-
                     <TextView
                         android:id="@+id/user_detail_login"
                         style="@style/TextAppearance.MaterialComponents.Body1"
@@ -153,8 +119,8 @@
                         android:layout_marginStart="@dimen/margin_small"
                         android:layout_marginTop="@dimen/margin_small"
                         android:drawableStart="@drawable/ic_baseline_business_24"
-                        android:text="@{viewModel.userDetail.company}"
                         android:drawablePadding="@dimen/margin_small"
+                        android:text="@{viewModel.userDetail.company}"
                         app:layout_constraintEnd_toEndOf="@id/end_guideline"
                         app:layout_constraintStart_toStartOf="@id/start_guideline"
                         app:layout_constraintTop_toBottomOf="@+id/user_image"
@@ -168,8 +134,8 @@
                         android:layout_marginStart="@dimen/margin_small"
                         android:layout_marginTop="@dimen/margin_small"
                         android:drawableStart="@drawable/ic_baseline_location_on_24"
-                        android:text="@{viewModel.userDetail.location}"
                         android:drawablePadding="@dimen/margin_small"
+                        android:text="@{viewModel.userDetail.location}"
                         app:layout_constraintEnd_toEndOf="@id/end_guideline"
                         app:layout_constraintStart_toStartOf="@id/start_guideline"
                         app:layout_constraintTop_toBottomOf="@+id/company_text"
@@ -184,9 +150,9 @@
                         android:layout_marginStart="@dimen/margin_small"
                         android:layout_marginTop="@dimen/margin_small"
                         android:drawableStart="@drawable/ic_baseline_person_pin_24"
+                        android:drawablePadding="@dimen/margin_small"
                         android:gravity="center_horizontal|start"
                         android:paddingBottom="@dimen/margin_normal"
-                        android:drawablePadding="@dimen/margin_small"
                         app:layout_constraintStart_toStartOf="@id/start_guideline"
                         app:layout_constraintTop_toBottomOf="@+id/location_text"
                         tools:text="8 followers" />
@@ -213,7 +179,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_normal"
-                app:layout_constraintTop_toBottomOf="@id/user_info_card_view">
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/user_info_card_view"
+                tools:visibility="visible">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -267,13 +235,13 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_small"
-                        android:layout_marginEnd="@dimen/margin_small"
                         android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginEnd="@dimen/margin_small"
                         android:gravity="center_horizontal|start"
                         android:text="@string/repositories"
                         app:layout_constraintEnd_toEndOf="@id/end_guideline2"
                         app:layout_constraintStart_toStartOf="@id/start_guideline2"
-                        app:layout_constraintTop_toBottomOf="@id/user_bio_text"/>
+                        app:layout_constraintTop_toBottomOf="@id/user_bio_text" />
 
                     <TextView
                         android:id="@+id/public_repos_value"
@@ -281,12 +249,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_small"
-                        android:layout_marginEnd="@dimen/margin_small"
                         android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginEnd="@dimen/margin_small"
                         android:gravity="center_horizontal|start"
                         app:layout_constraintEnd_toEndOf="@id/end_guideline2"
                         app:layout_constraintTop_toBottomOf="@id/user_bio_text"
-                        tools:text="1"/>
+                        tools:text="1" />
 
                     <TextView
                         android:id="@+id/public_gist_text"
@@ -294,14 +262,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_small"
-                        android:layout_marginEnd="@dimen/margin_small"
                         android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginEnd="@dimen/margin_small"
                         android:gravity="center_horizontal|start"
-                        android:text="@string/gists"
                         android:paddingBottom="@dimen/margin_normal"
+                        android:text="@string/gists"
                         app:layout_constraintEnd_toEndOf="@id/end_guideline2"
                         app:layout_constraintStart_toStartOf="@id/start_guideline2"
-                        app:layout_constraintTop_toBottomOf="@id/public_repos_text"/>
+                        app:layout_constraintTop_toBottomOf="@id/public_repos_text" />
 
                     <TextView
                         android:id="@+id/public_gist_value"
@@ -309,16 +277,25 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_small"
-                        android:layout_marginEnd="@dimen/margin_small"
                         android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginEnd="@dimen/margin_small"
                         android:gravity="center_horizontal|start"
                         app:layout_constraintEnd_toEndOf="@id/end_guideline2"
                         app:layout_constraintTop_toBottomOf="@id/public_repos_text"
-                        tools:text="1"/>
+                        tools:text="1" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

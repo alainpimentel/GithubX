@@ -18,7 +18,7 @@ class GithubRepository @Inject constructor(
     @OptIn(ExperimentalPagingApi::class)
     fun getUsers(pageSize: Int = 50) = Pager(
         config = PagingConfig(pageSize),
-        remoteMediator = PagedKeyRemoteMediator(db, service)
+        remoteMediator = PagedKeyRemoteMediator(db, service, pageSize)
     ) {
         //todo get since
         db.userDao().getUsers()

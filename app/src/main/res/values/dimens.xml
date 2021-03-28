@@ -6,4 +6,5 @@
     <dimen name="margin_small">8dp</dimen>
     <dimen name="user_card_size">150dp</dimen>
     <dimen name="user_detail_app_bar_height">278dp</dimen>
+    <dimen name="grid_column_width">150dp</dimen>
 </resources>

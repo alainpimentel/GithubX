@@ -34,12 +34,10 @@ class UserListViewModel @Inject internal constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
     val users: Flow<PagingData<User>> = flowOf(
-        clearListCh.receiveAsFlow().map { PagingData.empty<User>() },
+        clearListCh.receiveAsFlow().map { PagingData.empty() },
         savedStateHandle.getLiveData<String>(KEY_SAVED_STATE)
             .asFlow()
             .flatMapLatest { githubRepository.getUsers() }
-            // cachedIn() shares the paging state across multiple consumers of posts,
-            // e.g. different generations of UI across rotation config change
             .cachedIn(viewModelScope)
     ).flattenMerge(2)
 
