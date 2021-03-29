@@ -2,6 +2,7 @@ package com.alainp.githubx
 
 import GridAutofitLayoutManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +39,7 @@ class UserListFragment : Fragment() {
             footer = UsersLoadStateAdapter(adapter)
         )
         adapter.addLoadStateListener { loadState ->
-            binding.progressBar.isVisible = !isFirstLoad && loadState.refresh is LoadState.Loading
+            binding.progressBar.isVisible = !isFirstLoad && loadState.refresh is LoadState.Loading && adapter.itemCount == 0
             binding.errorText.isVisible = loadState.refresh is LoadState.Error && adapter.itemCount == 0
             isFirstLoad = false
         }
