@@ -35,20 +35,19 @@ class GithubRepository @Inject constructor(
             val exists =
                 db.userDetailDao().hasUserDetail(username, currentTimeMillis - TIMEOUT_DATA_MS)
             if (!exists) {
-                Log.d(TAG, "User $username does not exist, fetching...")
+                //Log.d(TAG, "User $username does not exist, fetching...")
                 val response = service.getUserDetail(username)
-                Log.d(TAG, "response User $response ...")
+                //Log.d(TAG, "response User $response ...")
                 val updatedUserDetail = response.copy(
                     lastUpdated = System.currentTimeMillis()
                 )
                 db.userDetailDao().insertAll(listOf(updatedUserDetail))
-                Log.d(TAG, "User $username was fetched...!\n $updatedUserDetail")
+                //Log.d(TAG, "User $username was fetched...!\n $updatedUserDetail")
             } else {
-                Log.d(TAG, "User $username is CACHED!")
+               // Log.d(TAG, "User $username is CACHED!")
             }
         } catch (exception: Exception) {
-            Log.e(TAG, "Error gettign user $username. $exception")
-
+           // Log.e(TAG, "Error gettign user $username. $exception")
         }
     }
 

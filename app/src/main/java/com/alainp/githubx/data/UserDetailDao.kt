@@ -15,5 +15,5 @@ interface UserDetailDao {
     fun hasUserDetail(username: String, timeout: Long): Boolean
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(plants: List<UserDetail>)
+    suspend fun insertAll(users: List<UserDetail>)
 }
